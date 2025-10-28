@@ -21,11 +21,23 @@ cmake --preset <windows-msvc-debug / windows-msvc-release>
 # "VS # 2022" or "Clion"
 
 # To manually build run the preset "windows-msvc-debug" for the debug build
-
-cmake --build windows-msvc-debug
+cmake --build out/build/-windows-msvc-debug
 
 # And run "windows-msvc-release" for the release build
-cmake --build windows-msvc-release
+cmake --build out/build/windows-msvc-release
+
+Finally run the resulting executable in the out/build/linux-g++-debug/
+or out/build/windows-msvc-release directory.
+
+# For example:
+
+# For Release builds:
+cd out/build/windows-msvc-release 
+.\OpenGL-CMake-Template.exe
+
+# For Debug builds:
+cd out/build/windows-msvc-debug 
+.\OpenGL-CMake-Template.exe
 ```
 
 ## Install Guide for Linux
@@ -42,9 +54,12 @@ sudo apt install cmake ninja-build build-essential
 ```
 git clone --recurse-submodules https://github.com/mem64-bits/OpenGL-CMake-Template
 
-cd vcpkg
+cd OpenGL-CMake-Template/vcpkg
 # Setups vcpkg executable for project (only needed once)
 ./bootstrap-vcpkg.sh
+
+# Go back to the project root
+cd ..
 
 #Select either "linux-g++-debug" or "linux-g++-release"
 cmake --preset <linux-g++-debug / windows-msvc-linux-g++-release>
@@ -53,12 +68,24 @@ cmake --preset <linux-g++-debug / windows-msvc-linux-g++-release>
 # have been installed the project can be built manually or through
 the IDE "Clion".
 
-# To manually build run the preset "linux-g++-debug" for the debug build
+# To manually build run the preset "windows-msvc-debug" for the debug build
+cmake --build out/build/linux-g++-debug/
 
-cmake --build linux-g++-debug
+# And run "windows-msvc-release" for the release build
+cmake --build out/build/linux-g++-release/
 
-# And run "linux-g++-release" for the release build
-cmake --build linux-g++-release
+Finally run the resulting executable in the out/build/linux-g++-debug/ for
+the debug build, or out/build/linux-g++-release/ for the release build.
+
+# For example:
+
+# For Release builds:
+cd out/build/linux-g++-release 
+./OpenGL-CMake-Template
+
+# For Debug builds:
+cd out/build/linux-g++-debug
+./OpenGL-CMake-Template
 ```
 
 ### Fedora
@@ -74,9 +101,12 @@ sudo dnf group install "development-tools" ninja-build cmake
 ```
 git clone --recurse-submodules https://github.com/mem64-bits/OpenGL-CMake-Template
 
-cd vcpkg
+cd OpenGL-CMake-Template/vcpkg
 # Setups vcpkg executable for project (only needed once)
 ./bootstrap-vcpkg.sh
+
+# Go back to the project root
+cd ..
 
 #Select either "linux-g++-debug" or "linux-g++-release"
 cmake --preset <linux-g++-debug / windows-msvc-linux-g++-release>
@@ -85,12 +115,24 @@ cmake --preset <linux-g++-debug / windows-msvc-linux-g++-release>
 # have been installed the project can be built manually or through
 the IDE "Clion".
 
-# To manually build run the preset "linux-g++-debug" for the debug build
+# To manually build run the preset "windows-msvc-debug" for the debug build
+cmake --build out/build/linux-g++-debug/
 
-cmake --build linux-g++-debug
+# And run "windows-msvc-release" for the release build
+cmake --build out/build/linux-g++-release/
 
-# And run "linux-g++-release" for the release build
-cmake --build linux-g++-release
+Finally run the resulting executable in the out/build/linux-g++-debug/ for
+the debug build, or out/build/linux-g++-release/ for the release build.
+
+# For example:
+
+# For Release builds:
+cd out/build/linux-g++-release 
+./OpenGL-CMake-Template
+
+# For Debug builds:
+cd out/build/linux-g++-debug
+./OpenGL-CMake-Template
 ```
 
 ### Arch
@@ -105,9 +147,12 @@ sudo pacman -Syu --needed base-devel cmake ninja
 ```
 git clone --recurse-submodules https://github.com/mem64-bits/OpenGL-CMake-Template
 
-cd vcpkg
+cd OpenGL-CMake-Template/vcpkg
 # Setups vcpkg executable for project (only needed once)
 ./bootstrap-vcpkg.sh
+
+# Go back to the project root
+cd ..
 
 #Select either "linux-g++-debug" or "linux-g++-release"
 cmake --preset <linux-g++-debug / windows-msvc-linux-g++-release>
@@ -116,10 +161,22 @@ cmake --preset <linux-g++-debug / windows-msvc-linux-g++-release>
 # have been installed the project can be built manually or through
 the IDE "Clion".
 
-# To manually build run the preset "linux-g++-debug" for the debug build
+# To manually build run the preset "windows-msvc-debug" for the debug build
+cmake --build out/build/linux-g++-debug/
 
-cmake --build linux-g++-debug
+# And run "windows-msvc-release" for the release build
+cmake --build out/build/linux-g++-release/
 
-# And run "linux-g++-release" for the release build
-cmake --build linux-g++-release
+Finally run the resulting executable in the out/build/linux-g++-debug/ for
+the debug build, or out/build/linux-g++-release/ for the release build.
+
+# For example:
+
+# For Release builds:
+cd out/build/linux-g++-release 
+./OpenGL-CMake-Template
+
+# For Debug builds:
+cd out/build/linux-g++-debug
+./OpenGL-CMake-Template
 ```
