@@ -1,10 +1,10 @@
 # OpenGL-CMake-Template
 ### Windows 11 Setup Guide
 
-- Install Visual Studio 2022 with C++ Development option, with Linux support selected (if you want to build for Linux using wsl2).
+- Install Visual Studio 2022 with the C++ Development option, with Linux support selected (if you want to build for Linux using wsl2).
 
-- Open VS 2022 Developer PowerShell (this is needed as env variables needed for cl.exe and other tools have been automatically set). You could also use environment that setups env variables needed for MSVC, e.g. selecting Visual Studio Toolchain in CLion, and running a CMake Preset through the GUI to
-  generate needed build files.
+- Open VS 2022 Developer PowerShell (this is needed as env variables needed for cl.exe and other tools have been automatically set). You could also use an environment that sets up env variables needed for MSVC, e.g., selecting Visual Studio Toolchain in CLion, and running a CMake Preset through the GUI to
+  generate necessary build files.
 
 ```
 git clone --recurse-submodules https://github.com/mem64-bits/OpenGL-CMake-Template
@@ -90,8 +90,8 @@ cd out/build/linux-g++-debug
 
 ### Fedora
 
-Install a desktop environment with x11 / wayland support or
-install these packages to ensure glfw works
+Install a desktop environment with x11 / wayland support and
+install these packages to ensure the buildsystem works
 
 ```
 sudo dnf group install "development-tools" ninja-build cmake
@@ -137,8 +137,8 @@ cd out/build/linux-g++-debug
 
 ### Arch
 
-Install a desktop environment with x11 / wayland support or
-install these packages to ensure glfw works
+Install a desktop environment with x11 / wayland support and
+install these packages to ensure the buildsystem works
 
 ```
 sudo pacman -Syu --needed base-devel cmake ninja
