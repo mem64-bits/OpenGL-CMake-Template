@@ -5,9 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <unordered_map> // For caching uniform locations
+#include <unordered_map>
 
-// For vecN/matN uniform setters
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -21,7 +20,7 @@ private:
 public:
     Shader(const char *vertexPath, const char *fragmentPath)
     {
-        // 1. retrieve the vertex/fragment source code from filePath
+        // retrieve the vertex/fragment source code from filePath
         std::string vertexCode;
         std::string fragmentCode;
         std::ifstream vShaderFile;
@@ -53,17 +52,19 @@ public:
         const char *vShaderCode = vertexCode.c_str();
         const char *fShaderCode = fragmentCode.c_str();
 
-        // 2. compile shaders
+        // compiles vertex shader from shader source code
         unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertexShader, 1, &vShaderCode, nullptr);
         glCompileShader(vertexShader);
         checkShaderCompileStatus(vertexShader);
 
+        // compiles fragment shader from shader source code
         unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragmentShader, 1, &fShaderCode, nullptr);
         glCompileShader(fragmentShader);
         checkShaderCompileStatus(fragmentShader);
 
+        // creates shader program and attaches vertex and fragment shaders
         shaderProgram = glCreateProgram();
         glAttachShader(shaderProgram, vertexShader);
         glAttachShader(shaderProgram, fragmentShader);
@@ -74,6 +75,7 @@ public:
         glDeleteShader(fragmentShader);
     }
 
+    // Safe deletion of shader when class goes out of scope
     ~Shader()
     {
         glDeleteProgram(shaderProgram);
@@ -85,14 +87,13 @@ public:
         glUseProgram(shaderProgram);
     }
     
-    // The single, powerful templated uniform setter
+    // The single, templated uniform setter to avoid multiple methods for GLSL Types
     template <typename T>
     void setUniform(const std::string &name, const T &value)
     {
         int location = getUniformLocation(name);
 
-        // if constexpr allows the compiler to discard the other branches,
-        // preventing compile errors for calling the wrong glUniform* function.
+        // Evaluates types at compile time to optimise away checks at runtime
         if constexpr (std::is_same_v<T, bool>) {
             glUniform1i(location, static_cast<int>(value));
         }
@@ -124,6 +125,7 @@ public:
     }
 
 private:
+    // Caches uniform location to avoid getting it every frame
     int getUniformLocation(const std::string &name) const
     {
         // Check if we already have this location in our cache
@@ -136,7 +138,6 @@ private:
         const int location = glGetUniformLocation(shaderProgram, name.c_str());
         if (location == -1)
         {
-            // A warning is useful for debugging typos in uniform names
             std::cerr << "Warning: uniform '" << name << "' not found!" << std::endl;
         }
 
