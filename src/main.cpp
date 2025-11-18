@@ -49,7 +49,7 @@ int main()
 
     glfwSetKeyCallback(window, key_callback);
 
-    // Uses our new shaderobject cutting down on boilerplate code
+    // Uses our new shader object cutting down on boilerplate code
     Shader shader{ "assets/shaders/shader.vert","assets/shaders/shader.frag" };
 
     float vertices[] = {
