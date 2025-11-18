@@ -17,9 +17,14 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); // the next version to try if major version fails
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    int width = 800;
-    int height = 600;
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Learning OpenGL", NULL, NULL);
+// Fixes scaling problems on wayland linux
+#ifdef __linux__
+    glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
+#endif
+
+    int width = 1920;
+    int height = 1200;
+    GLFWwindow* window = glfwCreateWindow(width, height, "Learning OpenGL", NULL, NULL);
     GLFWimage icons[1];
     icons[0] = load_icon("assets/icons/opengl.png");
 
@@ -41,7 +46,11 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-    glViewport(0, 0, width, height);
+    
+    // Get the actual framebuffer size (accounts for DPI scaling)
+    int framebufferWidth, framebufferHeight;
+    glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
+    glViewport(0, 0, framebufferWidth, framebufferHeight);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     WindowState* state{};
